@@ -112,8 +112,8 @@ export default function Dashboard() {
 
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Dashboard</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">Tổng quan về kế hoạch học tập của bạn</p>
+          <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
+          <p className="text-gray-600 mt-1">Tổng quan về kế hoạch học tập của bạn</p>
         </div>
       </div>
 
@@ -122,11 +122,11 @@ export default function Dashboard() {
         {statCards.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <div key={index} className={`${stat.bgColor} dark:bg-gray-800 rounded-lg p-6 shadow-sm`}>
+            <div key={index} className={`${stat.bgColor} rounded-lg p-6 shadow-sm`}>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{stat.title}</p>
-                  <p className={`text-3xl font-bold ${stat.textColor} dark:text-gray-100`}>{stat.value}</p>
+                  <p className="text-sm text-gray-600 mb-1">{stat.title}</p>
+                  <p className={`text-3xl font-bold ${stat.textColor}`}>{stat.value}</p>
                 </div>
                 <div className={`${stat.color} w-12 h-12 rounded-lg flex items-center justify-center`}>
                   <Icon className="text-white text-xl" />
@@ -139,19 +139,19 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Upcoming Tasks */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+        <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-              <FaCalendarCheck className="inline mr-2 text-blue-600 dark:text-blue-400" />
+            <h2 className="text-xl font-semibold text-gray-800">
+              <FaCalendarCheck className="inline mr-2 text-blue-600" />
               Công việc sắp tới
             </h2>
-            <Link to="/tasks" className="text-blue-600 dark:text-blue-400 hover:underline text-sm">
+            <Link to="/tasks" className="text-blue-600 hover:underline text-sm">
               Xem tất cả
             </Link>
           </div>
 
           {upcomingTasks.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400 text-center py-8">Không có công việc sắp tới</p>
+            <p className="text-gray-500 text-center py-8">Không có công việc sắp tới</p>
           ) : (
             <div className="space-y-3">
               {upcomingTasks.map((task) => {
@@ -162,7 +162,7 @@ export default function Dashboard() {
                   <div
                     key={task._id}
                     className={`border rounded-lg p-4 hover:shadow-md transition ${
-                      overdueTask ? 'border-red-300 bg-red-50 dark:bg-red-900/20 dark:border-red-700' : 'border-gray-200 dark:border-gray-700'
+                      overdueTask ? 'border-red-300 bg-red-50' : 'border-gray-200'
                     }`}
                   >
                     <div className="flex items-start justify-between">
@@ -173,7 +173,7 @@ export default function Dashboard() {
                             className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
                               task.status === 'completed'
                                 ? 'bg-green-500 border-green-500'
-                                : 'border-gray-300 dark:border-gray-600 hover:border-green-500'
+                                : 'border-gray-300 hover:border-green-500'
                             }`}
                           >
                             {task.status === 'completed' && (
@@ -181,7 +181,7 @@ export default function Dashboard() {
                             )}
                           </button>
                           <h3 className={`font-semibold ${
-                            task.status === 'completed' ? 'line-through text-gray-500 dark:text-gray-400' : 'text-gray-800 dark:text-gray-100'
+                            task.status === 'completed' ? 'line-through text-gray-500' : 'text-gray-800'
                           }`}>
                             {task.title}
                           </h3>
@@ -200,7 +200,7 @@ export default function Dashboard() {
                             {priorityConfig.label}
                           </span>
                         </div>
-                        <p className={`text-sm mt-2 ${overdueTask ? 'text-red-600 dark:text-red-400 font-semibold' : 'text-gray-600 dark:text-gray-400'}`}>
+                        <p className={`text-sm mt-2 ${overdueTask ? 'text-red-600 font-semibold' : 'text-gray-600'}`}>
                           {overdueTask ? '⚠️ Quá hạn: ' : ''}
                           {formatRelativeTime(task.dueDate)}
                         </p>
@@ -214,20 +214,20 @@ export default function Dashboard() {
         </div>
 
         {/* Courses Overview */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+        <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-              <FaListAlt className="inline mr-2 text-blue-600 dark:text-blue-400" />
+            <h2 className="text-xl font-semibold text-gray-800">
+              <FaListAlt className="inline mr-2 text-blue-600" />
               Môn học ({courses.length})
             </h2>
-            <Link to="/courses" className="text-blue-600 dark:text-blue-400 hover:underline text-sm">
+            <Link to="/courses" className="text-blue-600 hover:underline text-sm">
               Quản lý
             </Link>
           </div>
 
           {courses.length === 0 ? (
             <div className="text-center py-8">
-              <p className="text-gray-500 dark:text-gray-400 mb-4">Chưa có môn học nào</p>
+              <p className="text-gray-500 mb-4">Chưa có môn học nào</p>
               <Link
                 to="/courses"
                 className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
@@ -240,7 +240,7 @@ export default function Dashboard() {
               {courses.slice(0, 5).map((course) => (
                 <div
                   key={course._id}
-                  className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition"
+                  className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -249,14 +249,14 @@ export default function Dashboard() {
                         style={{ backgroundColor: course.color }}
                       />
                       <div>
-                        <h3 className="font-semibold text-gray-800 dark:text-gray-100">{course.name}</h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{course.code}</p>
+                        <h3 className="font-semibold text-gray-800">{course.name}</h3>
+                        <p className="text-sm text-gray-500">{course.code}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{course.credits} tín chỉ</p>
+                      <p className="text-sm text-gray-600">{course.credits} tín chỉ</p>
                       {course.instructor && (
-                        <p className="text-xs text-gray-500 dark:text-gray-500">{course.instructor}</p>
+                        <p className="text-xs text-gray-500">{course.instructor}</p>
                       )}
                     </div>
                   </div>
