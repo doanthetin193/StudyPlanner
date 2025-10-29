@@ -1,6 +1,7 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
+import { useTaskNotifications } from '../../hooks/useTaskNotifications';
 import { 
   FaHome, 
   FaBook, 
@@ -20,6 +21,9 @@ export default function Layout() {
   const { isDarkMode, toggleTheme } = useTheme();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Enable task notifications
+  useTaskNotifications();
 
   const navigation = [
     { name: 'Dashboard', href: '/', icon: FaHome },

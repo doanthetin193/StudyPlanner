@@ -12,6 +12,8 @@ import {
 import { formatRelativeTime, isOverdue } from '../../utils/dateHelpers';
 import { TASK_PRIORITIES, TASK_STATUS } from '../../utils/constants';
 import { Link } from 'react-router-dom';
+import NotificationPermission from '../../components/notifications/NotificationPermission';
+import NotificationTest from '../../components/notifications/NotificationTest';
 
 export default function Dashboard() {
   const [stats, setStats] = useState(null);
@@ -105,6 +107,9 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
+      {/* Notification Permission Banner */}
+      <NotificationPermission />
+
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Dashboard</h1>
@@ -261,6 +266,9 @@ export default function Dashboard() {
           )}
         </div>
       </div>
+
+      {/* Test Notification Button */}
+      <NotificationTest />
     </div>
   );
 }

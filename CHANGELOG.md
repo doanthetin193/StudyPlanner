@@ -1,5 +1,46 @@
 # 📝 CHANGELOG - STUDY PLANNER
 
+## [1.1.0] - 2025-10-29 🔔
+
+### ✨ **NOTIFICATION FEATURE - YÊU CẦU B4 HOÀN THÀNH**
+
+#### 🆕 Tính Năng Mới
+
+**Browser Notification System**
+- ✅ **NotificationContext**: Context quản lý notification permission và state
+- ✅ **useTaskNotifications Hook**: Auto-check task sắp đến hạn mỗi 1 phút
+- ✅ **NotificationPermission Banner**: Request permission từ user
+- ✅ **NotificationTest Button**: Test notification ngay trên Dashboard
+- ✅ **Smart Notification Logic**:
+  - Thông báo khi task còn <= `remindBefore` phút (default: 60 phút)
+  - Thông báo urgent khi task vừa quá hạn (< 5 phút)
+  - Nhóm notification theo khoảng 5 phút để tránh spam
+  - Vibrate cho task urgent
+  - Auto-close sau 10 giây
+
+#### 📁 Files Đã Thêm/Sửa
+- ✅ `frontend/src/context/NotificationContext.jsx` - Context mới
+- ✅ `frontend/src/hooks/useTaskNotifications.js` - Hook mới
+- ✅ `frontend/src/components/notifications/NotificationPermission.jsx` - Component mới
+- ✅ `frontend/src/components/notifications/NotificationTest.jsx` - Component mới
+- ✅ `frontend/src/App.jsx` - Thêm NotificationProvider
+- ✅ `frontend/src/components/layout/Layout.jsx` - Enable useTaskNotifications
+- ✅ `frontend/src/pages/dashboard/Dashboard.jsx` - Show banner + test button
+- ✅ `NOTIFICATION_GUIDE.md` - Tài liệu hướng dẫn đầy đủ
+
+#### 🎯 Kịch Bản Notification
+- ⏰ **Sắp đến hạn**: Notification khi còn 10-60 phút
+- 🚨 **Quá hạn**: Notification URGENT + vibrate khi vừa quá hạn
+- 🔕 **Permission denied**: Hiển thị hướng dẫn bật lại
+- 💾 **LocalStorage**: Lưu trạng thái dismiss banner
+
+#### 📊 Metrics
+- Code added: ~320 dòng
+- Time: 2-3 giờ
+- Browser support: Chrome, Firefox, Edge, Safari (limited)
+
+---
+
 ## [1.0.0] - 2025-10-29 🎉
 
 ### ✨ **PHIÊN BẢN HOÀN CHỈNH - 100% TÍNH NĂNG**
