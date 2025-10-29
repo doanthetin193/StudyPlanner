@@ -5,9 +5,7 @@ import {
   FaHome, 
   FaBook, 
   FaTasks, 
-  FaCalendarAlt, 
-  FaUser, 
-  FaSignOutAlt,
+  FaCalendarAlt,
   FaBars,
   FaTimes
 } from 'react-icons/fa';
@@ -36,28 +34,33 @@ export default function Layout() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden backdrop-blur-sm"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${
+      <div className={`fixed inset-y-0 left-0 w-72 bg-gradient-to-b from-white to-gray-50 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 border-r-2 border-gray-200 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       } lg:translate-x-0`}>
         <div className="flex flex-col h-full">
-          {/* Logo */}
-          <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-            <h1 className="text-xl font-bold text-blue-600">📚 Study Planner</h1>
+          {/* Logo with gradient */}
+          <div className="flex items-center justify-between h-20 px-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 shadow-lg">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                <span className="text-2xl">📚</span>
+              </div>
+              <h1 className="text-xl font-bold text-white">Study Planner</h1>
+            </div>
             <button 
-              className="lg:hidden text-gray-600"
+              className="lg:hidden text-white hover:bg-white/20 p-2 rounded-lg transition-colors"
               onClick={() => setSidebarOpen(false)}
             >
-              <FaTimes />
+              <FaTimes size={20} />
             </button>
           </div>
 
@@ -71,63 +74,67 @@ export default function Layout() {
                   key={item.name}
                   to={item.href}
                   onClick={() => setSidebarOpen(false)}
-                  className={`flex items-center px-4 py-3 rounded-lg transition ${
+                  className={`flex items-center px-5 py-3.5 rounded-xl transition-all duration-200 group ${
                     active
-                      ? 'bg-blue-50 text-blue-600 font-semibold'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold shadow-lg scale-105'
+                      : 'text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:text-blue-600 font-semibold'
                   }`}
                 >
-                  <Icon className="mr-3" />
-                  {item.name}
+                  <Icon className={`mr-3 text-lg ${active ? 'text-white' : 'text-gray-500 group-hover:text-blue-600'}`} />
+                  <span>{item.name}</span>
+                  {active && (
+                    <div className="ml-auto w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                  )}
                 </Link>
               );
             })}
           </nav>
 
-          {/* User section */}
-          <div className="border-t border-gray-200 p-4">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">
+          {/* User section with gradient */}
+          <div className="border-t-2 border-gray-200 bg-gradient-to-r from-gray-50 to-blue-50 p-5">
+            <div className="flex items-center mb-4 p-3 bg-white rounded-xl shadow-md">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
                 {user?.name?.charAt(0).toUpperCase()}
               </div>
               <div className="ml-3 flex-1">
-                <p className="text-sm font-semibold text-gray-800">{user?.name}</p>
+                <p className="text-sm font-bold text-gray-800">{user?.name}</p>
                 <p className="text-xs text-gray-500">{user?.email}</p>
               </div>
             </div>
             <Link
               to="/profile"
               onClick={() => setSidebarOpen(false)}
-              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg mb-2"
+              className="flex items-center px-4 py-3 text-gray-700 hover:bg-white hover:text-blue-600 rounded-xl mb-2 font-semibold transition-all hover:shadow-md group"
             >
-              <FaUser className="mr-3" />
-              Hồ sơ
+              <span>👤 Hồ sơ</span>
             </Link>
             <button
               onClick={() => {
                 logout();
                 setSidebarOpen(false);
               }}
-              className="w-full flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg"
+              className="w-full flex items-center px-4 py-3 text-red-600 hover:bg-red-50 rounded-xl font-semibold transition-all hover:shadow-md group"
             >
-              <FaSignOutAlt className="mr-3" />
-              Đăng xuất
+              <span>🚪 Đăng xuất</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* Main content */}
-      <div className="lg:pl-64">
-        {/* Top bar (mobile) */}
-        <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white shadow-md z-30 flex items-center px-4">
+      <div className="lg:pl-72">
+        {/* Top bar (mobile) with gradient */}
+        <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 shadow-xl z-30 flex items-center px-4">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="text-gray-600 mr-4"
+            className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors mr-3"
           >
             <FaBars size={24} />
           </button>
-          <h1 className="text-lg font-bold text-blue-600">📚 Study Planner</h1>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">📚</span>
+            <h1 className="text-lg font-bold text-white">Study Planner</h1>
+          </div>
         </div>
 
         {/* Content */}

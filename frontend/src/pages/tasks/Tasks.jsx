@@ -161,40 +161,54 @@ export default function Tasks() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between flex-wrap gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-800">Công việc</h1>
-          <p className="text-gray-600 mt-1">
-            Quản lý công việc và bài tập ({filteredTasks.length} công việc)
-          </p>
-        </div>
-        <div className="flex gap-3">
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
-          >
-            <FaFilter /> Lọc
-          </button>
-          <button
-            onClick={() => setShowModal(true)}
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2 shadow-md"
-          >
-            <FaPlus /> Thêm công việc
-          </button>
+      {/* Header with gradient */}
+      <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-2xl shadow-xl p-8 text-white">
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <div className="bg-white/20 backdrop-blur-sm p-3 rounded-xl">
+                <FaTasks className="text-3xl" />
+              </div>
+              <h1 className="text-4xl font-bold">📋 Công việc</h1>
+            </div>
+            <p className="text-blue-50 text-lg">
+              Quản lý công việc và bài tập • <span className="font-semibold">{filteredTasks.length} công việc</span>
+            </p>
+          </div>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className={`flex items-center gap-2 px-5 py-3 rounded-xl font-semibold transition-all shadow-lg hover:shadow-xl ${
+                showFilters 
+                  ? 'bg-white text-blue-600' 
+                  : 'bg-white/20 backdrop-blur-sm text-white hover:bg-white/30'
+              }`}
+            >
+              <FaFilter /> {showFilters ? 'Ẩn bộ lọc' : 'Lọc'}
+            </button>
+            <button
+              onClick={() => setShowModal(true)}
+              className="bg-white text-blue-600 px-6 py-3 rounded-xl hover:bg-blue-50 transition-all flex items-center gap-2 shadow-lg hover:shadow-xl font-semibold hover:scale-105"
+            >
+              <FaPlus /> Thêm công việc
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Filters */}
       {showFilters && (
-        <div className="bg-white rounded-lg shadow-sm p-4 space-y-4">
+        <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl p-6 border-2 border-blue-100">
+          <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <FaFilter className="text-blue-600" /> Bộ lọc nâng cao
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Môn học</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">📚 Môn học</label>
               <select
                 value={filterCourse}
                 onChange={(e) => setFilterCourse(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white font-medium"
               >
                 <option value="all">Tất cả môn học</option>
                 {courses.map(course => (
@@ -203,11 +217,11 @@ export default function Tasks() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Trạng thái</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">🎯 Trạng thái</label>
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white font-medium"
               >
                 <option value="all">Tất cả trạng thái</option>
                 {Object.entries(TASK_STATUS).map(([key, val]) => (
@@ -216,11 +230,11 @@ export default function Tasks() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Độ ưu tiên</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">⚡ Độ ưu tiên</label>
               <select
                 value={filterPriority}
                 onChange={(e) => setFilterPriority(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white font-medium"
               >
                 <option value="all">Tất cả độ ưu tiên</option>
                 {Object.entries(TASK_PRIORITIES).map(([key, val]) => (
@@ -234,16 +248,19 @@ export default function Tasks() {
 
       {/* Task List */}
       {filteredTasks.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-          <FaTasks className="text-6xl text-gray-300 mx-auto mb-4" />
-          <p className="text-gray-500 text-lg mb-4">
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-xl p-16 text-center border-2 border-dashed border-blue-200">
+          <div className="text-8xl mb-6 animate-bounce">📋</div>
+          <p className="text-gray-700 text-2xl font-bold mb-3">
             {tasks.length === 0 ? 'Chưa có công việc nào' : 'Không có công việc phù hợp với bộ lọc'}
+          </p>
+          <p className="text-gray-500 text-lg mb-6">
+            {tasks.length === 0 ? 'Hãy thêm công việc đầu tiên để bắt đầu!' : 'Thử thay đổi bộ lọc hoặc thêm công việc mới'}
           </p>
           <button
             onClick={() => setShowModal(true)}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-all font-semibold text-lg hover:scale-105"
           >
-            Thêm công việc đầu tiên
+            <FaPlus className="inline mr-2" /> Thêm công việc đầu tiên
           </button>
         </div>
       ) : (
@@ -254,10 +271,13 @@ export default function Tasks() {
             const statusConfig = TASK_STATUS[status];
             
             return (
-              <div key={status} className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <span className={`w-3 h-3 rounded-full bg-${statusConfig.color}-500`}></span>
-                  {statusConfig.label} ({statusTasks.length})
+              <div key={status} className="bg-white rounded-2xl shadow-xl p-6 border-2 border-gray-100">
+                <h2 className="text-xl font-bold mb-4 flex items-center gap-3">
+                  <span className={`w-4 h-4 rounded-full bg-${statusConfig.color}-500 shadow-lg`}></span>
+                  <span className="text-gray-800">{statusConfig.label}</span>
+                  <span className={`ml-auto bg-${statusConfig.color}-100 text-${statusConfig.color}-700 px-3 py-1 rounded-full text-sm font-bold`}>
+                    {statusTasks.length}
+                  </span>
                 </h2>
                 
                 <div className="space-y-3">
@@ -269,62 +289,71 @@ export default function Tasks() {
                     return (
                       <div
                         key={task._id}
-                        className={`border rounded-lg p-4 hover:shadow-md transition ${
-                          overdueTask ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                        className={`border-l-4 rounded-xl p-5 transition-all duration-300 ${
+                          overdueTask 
+                            ? 'border-red-500 bg-gradient-to-r from-red-50 to-orange-50 hover:shadow-xl hover:from-red-100' 
+                            : task.status === 'completed'
+                            ? 'border-green-500 bg-gradient-to-r from-green-50 to-emerald-50 hover:shadow-xl'
+                            : 'border-blue-400 bg-gradient-to-r from-blue-50 to-cyan-50 hover:shadow-xl hover:border-blue-600'
                         }`}
                       >
                         <div className="flex items-start gap-4">
                           {/* Checkbox */}
                           <button
                             onClick={() => handleToggleStatus(task)}
-                            className={`mt-1 w-6 h-6 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                            className={`mt-1 w-7 h-7 rounded-lg border-2 flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
                               task.status === 'completed'
-                                ? 'bg-green-500 border-green-500'
-                                : 'border-gray-300 hover:border-green-500'
+                                ? 'bg-green-500 border-green-500 shadow-lg'
+                                : 'border-gray-300 hover:border-green-500 hover:scale-110'
                             }`}
                           >
                             {task.status === 'completed' && (
-                              <FaCheckCircle className="text-white text-sm" />
+                              <FaCheckCircle className="text-white text-base" />
                             )}
                           </button>
 
                           {/* Content */}
                           <div className="flex-1 min-w-0">
-                            <h3 className={`text-lg font-semibold mb-2 ${
+                            <h3 className={`text-xl font-bold mb-2 ${
                               task.status === 'completed' ? 'line-through text-gray-500' : 'text-gray-800'
                             }`}>
                               {task.title}
                             </h3>
 
                             {task.description && (
-                              <p className="text-sm text-gray-600 mb-3">{task.description}</p>
+                              <p className="text-sm text-gray-600 mb-3 p-3 bg-white/50 rounded-lg border border-gray-200 italic">
+                                💬 {task.description}
+                              </p>
                             )}
 
                             <div className="flex flex-wrap gap-2 mb-3">
                               <span
-                                className="px-3 py-1 rounded-full text-xs font-medium"
+                                className="px-3 py-1.5 rounded-full text-xs font-bold shadow-sm"
                                 style={{
-                                  backgroundColor: task.course?.color + '20',
-                                  color: task.course?.color
+                                  backgroundColor: task.course?.color + '30',
+                                  color: task.course?.color,
+                                  border: `1.5px solid ${task.course?.color}50`
                                 }}
                               >
-                                {task.course?.name}
+                                📚 {task.course?.name}
                               </span>
-                              <span className={`px-3 py-1 rounded-full text-xs font-medium bg-${typeConfig.color}-100 text-${typeConfig.color}-700`}>
-                                {typeConfig.label}
+                              <span className={`px-3 py-1.5 rounded-full text-xs font-bold shadow-sm bg-${typeConfig.color}-100 text-${typeConfig.color}-700 border border-${typeConfig.color}-300`}>
+                                {typeConfig.icon} {typeConfig.label}
                               </span>
-                              <span className={`px-3 py-1 rounded-full text-xs font-medium bg-${priorityConfig.color}-100 text-${priorityConfig.color}-700`}>
-                                {priorityConfig.label}
+                              <span className={`px-3 py-1.5 rounded-full text-xs font-bold shadow-sm bg-${priorityConfig.color}-100 text-${priorityConfig.color}-700 border border-${priorityConfig.color}-300`}>
+                                {priorityConfig.icon} {priorityConfig.label}
                               </span>
                             </div>
 
-                            <div className="flex items-center gap-4 text-sm">
-                              <span className={`${overdueTask ? 'text-red-600 font-semibold' : 'text-gray-600'}`}>
-                                {overdueTask && '⚠️ Quá hạn: '}
-                                📅 {formatRelativeTime(task.dueDate)}
+                            <div className="flex items-center gap-4 text-sm mb-3">
+                              <span className={`font-bold ${
+                                overdueTask ? 'text-red-700' : task.status === 'completed' ? 'text-green-700' : 'text-blue-700'
+                              }`}>
+                                {overdueTask ? '⚠️ Quá hạn: ' : task.status === 'completed' ? '✅ ' : '🕒 '}
+                                {formatRelativeTime(task.dueDate)}
                               </span>
                               {task.estimatedTime && (
-                                <span className="text-gray-600">
+                                <span className="text-gray-600 bg-gray-100 px-3 py-1 rounded-full font-semibold">
                                   ⏱️ {task.estimatedTime} phút
                                 </span>
                               )}
@@ -335,17 +364,17 @@ export default function Tasks() {
                           <div className="flex gap-2 flex-shrink-0">
                             <button
                               onClick={() => handleEdit(task)}
-                              className="text-blue-600 hover:bg-blue-50 p-2 rounded transition"
+                              className="bg-blue-100 text-blue-600 hover:bg-blue-200 p-3 rounded-xl transition-all border border-blue-300 hover:scale-110 shadow-sm"
                               title="Sửa"
                             >
-                              <FaEdit />
+                              <FaEdit className="text-lg" />
                             </button>
                             <button
                               onClick={() => handleDelete(task._id, task.title)}
-                              className="text-red-600 hover:bg-red-50 p-2 rounded transition"
+                              className="bg-red-100 text-red-600 hover:bg-red-200 p-3 rounded-xl transition-all border border-red-300 hover:scale-110 shadow-sm"
                               title="Xóa"
                             >
-                              <FaTrash />
+                              <FaTrash className="text-lg" />
                             </button>
                           </div>
                         </div>
@@ -361,15 +390,20 @@ export default function Tasks() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-800">
-                {editingTask ? 'Sửa công việc' : 'Thêm công việc mới'}
-              </h2>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="sticky top-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-6 py-5 flex items-center justify-between rounded-t-2xl">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg">
+                  <FaTasks className="text-white text-xl" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">
+                  {editingTask ? '✏️ Sửa công việc' : '➕ Thêm công việc mới'}
+                </h2>
+              </div>
               <button
                 onClick={handleCloseModal}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors"
               >
                 <FaTimes size={24} />
               </button>
@@ -494,19 +528,19 @@ export default function Tasks() {
                 />
               </div>
 
-              <div className="flex gap-3 pt-4">
+              <div className="flex gap-3 pt-6 border-t">
                 <button
                   type="submit"
-                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+                  className="flex-1 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white py-3.5 rounded-xl font-bold hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl hover:scale-105"
                 >
-                  {editingTask ? 'Cập nhật' : 'Thêm công việc'}
+                  {editingTask ? '✅ Cập nhật' : '➕ Thêm công việc'}
                 </button>
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="px-6 py-3 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50 transition"
+                  className="px-8 py-3.5 border-2 border-gray-300 rounded-xl font-bold hover:bg-gray-100 transition-all hover:border-gray-400"
                 >
-                  Hủy
+                  ❌ Hủy
                 </button>
               </div>
             </form>

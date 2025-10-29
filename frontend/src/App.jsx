@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { NotificationProvider } from './context/NotificationContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,8 +18,17 @@ import Profile from './pages/profile/Profile';
 
 // Protected Route Component
 function PrivateRoute({ children }) {
-  const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/login" />;
+  const { isAuthenticated, loading } = useAuth();
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+  
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
 }
 
 function App() {

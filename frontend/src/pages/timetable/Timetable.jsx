@@ -122,53 +122,63 @@ export default function Timetable() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-800">Thời khóa biểu</h1>
-          <p className="text-gray-600 mt-1">Lịch học cố định trong tuần</p>
+      {/* Header with gradient */}
+      <div className="bg-gradient-to-r from-purple-600 via-pink-500 to-rose-500 rounded-2xl shadow-xl p-8 text-white">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <div className="bg-white/20 backdrop-blur-sm p-3 rounded-xl">
+                <FaCalendarWeek className="text-3xl" />
+              </div>
+              <h1 className="text-4xl font-bold">📅 Thời khóa biểu</h1>
+            </div>
+            <p className="text-purple-50 text-lg">
+              Lịch học cố định trong tuần • Quản lý thời gian hiệu quả
+            </p>
+          </div>
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-white text-purple-600 px-6 py-3 rounded-xl hover:bg-purple-50 transition-all flex items-center gap-2 shadow-lg hover:shadow-xl font-semibold hover:scale-105"
+          >
+            <FaPlus /> Thêm lịch học
+          </button>
         </div>
-        <button
-          onClick={() => setShowModal(true)}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2 shadow-md"
-        >
-          <FaPlus /> Thêm lịch học
-        </button>
       </div>
 
       {/* Weekly Calendar */}
       {!hasAnyClass ? (
-        <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-          <FaCalendarWeek className="text-6xl text-gray-300 mx-auto mb-4" />
-          <p className="text-gray-500 text-lg mb-4">Chưa có lịch học nào</p>
+        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-xl p-16 text-center border-2 border-dashed border-purple-200">
+          <div className="text-8xl mb-6 animate-bounce">📅</div>
+          <p className="text-gray-700 text-2xl font-bold mb-3">Chưa có lịch học nào</p>
+          <p className="text-gray-500 text-lg mb-6">Hãy thêm lịch học để quản lý thời gian hiệu quả!</p>
           <button
             onClick={() => setShowModal(true)}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-xl hover:from-purple-700 hover:to-pink-700 shadow-lg hover:shadow-xl transition-all font-semibold text-lg hover:scale-105"
           >
-            Thêm lịch học đầu tiên
+            <FaPlus className="inline mr-2" /> Thêm lịch học đầu tiên
           </button>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-gray-100">
           {/* Desktop View */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="border border-gray-200 px-4 py-3 text-left text-sm font-semibold text-gray-700 w-24">
-                    Giờ
+                <tr className="bg-gradient-to-r from-purple-100 to-pink-100">
+                  <th className="border-2 border-purple-200 px-4 py-4 text-left text-sm font-bold text-purple-900 w-24">
+                    ⏰ Giờ
                   </th>
                   {DAYS_OF_WEEK.slice(1).map(day => (
-                    <th key={day.value} className="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-700">
-                      {day.label}
+                    <th key={day.value} className="border-2 border-purple-200 px-4 py-4 text-center text-sm font-bold text-purple-900">
+                      {day.emoji} {day.label}
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {timeSlots.map(time => (
-                  <tr key={time}>
-                    <td className="border border-gray-200 px-4 py-2 text-sm text-gray-600 font-medium bg-gray-50">
+                  <tr key={time} className="hover:bg-purple-50/30 transition-colors">
+                    <td className="border border-gray-200 px-4 py-3 text-sm text-gray-700 font-bold bg-gradient-to-r from-gray-50 to-gray-100">
                       {time}
                     </td>
                     {DAYS_OF_WEEK.slice(1).map(day => {
@@ -181,34 +191,34 @@ export default function Timetable() {
                       });
 
                       return (
-                        <td key={day.value} className="border border-gray-200 p-1">
+                        <td key={day.value} className="border border-gray-200 p-2 bg-white">
                           {classAtTime && parseInt(classAtTime.startTime.split(':')[0]) === parseInt(time.split(':')[0]) && (
                             <div
-                              className="rounded p-2 text-xs cursor-pointer hover:shadow-md transition group relative"
+                              className="rounded-xl p-3 text-xs cursor-pointer hover:shadow-xl transition-all duration-300 group relative border-l-4 hover:scale-105"
                               style={{ 
                                 backgroundColor: classAtTime.course?.color + '20',
-                                borderLeft: `4px solid ${classAtTime.course?.color}`
+                                borderLeftColor: classAtTime.course?.color
                               }}
                             >
-                              <div className="font-semibold mb-1" style={{ color: classAtTime.course?.color }}>
-                                {classAtTime.course?.name}
+                              <div className="font-bold mb-1.5 text-sm" style={{ color: classAtTime.course?.color }}>
+                                📚 {classAtTime.course?.name}
                               </div>
-                              <div className="text-gray-600">
-                                {classAtTime.startTime} - {classAtTime.endTime}
+                              <div className="text-gray-700 font-semibold mb-1">
+                                🕐 {classAtTime.startTime} - {classAtTime.endTime}
                               </div>
                               {classAtTime.room && (
-                                <div className="text-gray-500">📍 {classAtTime.room}</div>
+                                <div className="text-gray-600 font-medium">📍 {classAtTime.room}</div>
                               )}
-                              <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 flex gap-1">
+                              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 flex gap-1 transition-opacity">
                                 <button
                                   onClick={() => handleEdit(classAtTime)}
-                                  className="bg-white p-1 rounded shadow hover:bg-blue-50 text-blue-600"
+                                  className="bg-blue-500 text-white p-1.5 rounded-lg shadow-lg hover:bg-blue-600 transition-all"
                                 >
                                   <FaEdit size={12} />
                                 </button>
                                 <button
                                   onClick={() => handleDelete(classAtTime._id)}
-                                  className="bg-white p-1 rounded shadow hover:bg-red-50 text-red-600"
+                                  className="bg-red-500 text-white p-1.5 rounded-lg shadow-lg hover:bg-red-600 transition-all"
                                 >
                                   <FaTrash size={12} />
                                 </button>
@@ -231,45 +241,50 @@ export default function Timetable() {
               if (dayClasses.length === 0) return null;
 
               return (
-                <div key={day.value} className="border-b border-gray-200 p-4">
-                  <h3 className="font-semibold text-gray-800 mb-3">{day.label}</h3>
-                  <div className="space-y-2">
+                <div key={day.value} className="border-b-2 border-purple-200 p-5 bg-gradient-to-r from-purple-50/30 to-pink-50/30">
+                  <h3 className="font-bold text-lg text-purple-900 mb-4 flex items-center gap-2">
+                    {day.emoji} {day.label}
+                    <span className="ml-auto bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs">
+                      {dayClasses.length} lớp
+                    </span>
+                  </h3>
+                  <div className="space-y-3">
                     {dayClasses.map(entry => (
                       <div
                         key={entry._id}
-                        className="rounded-lg p-3 border-l-4"
+                        className="rounded-xl p-4 border-l-4 shadow-md hover:shadow-xl transition-all duration-300"
                         style={{ 
                           backgroundColor: entry.course?.color + '20',
                           borderLeftColor: entry.course?.color
                         }}
                       >
-                        <div className="flex items-start justify-between mb-2">
-                          <div className="font-semibold" style={{ color: entry.course?.color }}>
-                            {entry.course?.name}
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="font-bold text-base" style={{ color: entry.course?.color }}>
+                            📚 {entry.course?.name}
                           </div>
                           <div className="flex gap-2">
                             <button
                               onClick={() => handleEdit(entry)}
-                              className="text-blue-600 p-1"
+                              className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-all"
                             >
                               <FaEdit size={14} />
                             </button>
                             <button
                               onClick={() => handleDelete(entry._id)}
-                              className="text-red-600 p-1"
+                              className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-all"
                             >
                               <FaTrash size={14} />
                             </button>
                           </div>
                         </div>
-                        <div className="text-sm text-gray-600">
-                          ⏰ {entry.startTime} - {entry.endTime}
+                        <div className="text-sm text-gray-700 font-semibold mb-2">
+                          🕐 {entry.startTime} - {entry.endTime}
                         </div>
                         {entry.room && (
-                          <div className="text-sm text-gray-600">📍 {entry.room}</div>
+                          <div className="text-sm text-gray-600 font-medium mb-2">📍 {entry.room}</div>
                         )}
-                        <div className="text-xs text-gray-500 mt-1">
-                          {CLASS_TYPES[entry.type].label}
+                        <div className="inline-block text-xs bg-white/50 px-3 py-1 rounded-full font-semibold text-gray-700 border border-gray-300">
+                          {CLASS_TYPES[entry.type].icon} {CLASS_TYPES[entry.type].label}
                         </div>
                       </div>
                     ))}
@@ -283,15 +298,20 @@ export default function Timetable() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-800">
-                {editingEntry ? 'Sửa lịch học' : 'Thêm lịch học mới'}
-              </h2>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="sticky top-0 bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-5 flex items-center justify-between rounded-t-2xl">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg">
+                  <FaCalendarWeek className="text-white text-xl" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">
+                  {editingEntry ? '✏️ Sửa lịch học' : '➕ Thêm lịch học mới'}
+                </h2>
+              </div>
               <button
                 onClick={handleCloseModal}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors"
               >
                 <FaTimes size={24} />
               </button>
@@ -402,19 +422,19 @@ export default function Timetable() {
                 />
               </div>
 
-              <div className="flex gap-3 pt-4">
+              <div className="flex gap-3 pt-6 border-t">
                 <button
                   type="submit"
-                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+                  className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3.5 rounded-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl hover:scale-105"
                 >
-                  {editingEntry ? 'Cập nhật' : 'Thêm lịch học'}
+                  {editingEntry ? '✅ Cập nhật' : '➕ Thêm lịch học'}
                 </button>
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="px-6 py-3 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50 transition"
+                  className="px-8 py-3.5 border-2 border-gray-300 rounded-xl font-bold hover:bg-gray-100 transition-all hover:border-gray-400"
                 >
-                  Hủy
+                  ❌ Hủy
                 </button>
               </div>
             </form>

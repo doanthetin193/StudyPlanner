@@ -1,30 +1,121 @@
-# 📚 Study Planner - Ứng dụng Lập Kế Hoạch Học Tập
+# 📚 Study Planner - Ứng dụng Quản lý Học tập
 
-## 🎯 Mô tả dự án
+Ứng dụng web giúp sinh viên quản lý học tập hiệu quả với giao diện hiện đại, màu sắc bắt mắt và tính năng thông báo thông minh.
 
-Ứng dụng web hỗ trợ sinh viên quản lý kế hoạch học tập theo tuần, bao gồm:
-- ✅ Quản lý môn học và thời khóa biểu
-- ✅ Lập kế hoạch công việc (task) chi tiết
-- ✅ Theo dõi tiến độ học tập
-- ✅ Nhắc nhở deadline
+## ✨ Tính năng chính
+
+### 📊 Dashboard - Trang tổng quan
+- Thống kê tổng quan: số lượng khóa học, nhiệm vụ, buổi học
+- Hiển thị nhiệm vụ sắp tới và danh sách khóa học đang theo học
+- Giao diện gradient màu sắc bắt mắt với các card thông tin
+
+### 📖 Quản lý khóa học
+- Thêm, sửa, xóa thông tin khóa học
+- Lưu trữ thông tin: tên môn, mã môn, giảng viên, phòng học, học kỳ, năm học
+- Hiển thị danh sách khóa học với design gradient và icon màu sắc
+
+### ✅ Quản lý nhiệm vụ (Tasks)
+- Tạo và theo dõi các nhiệm vụ học tập
+- **Phân loại nhiệm vụ**: Bài tập (📝), Dự án (📋), Thi (🚀), Ôn tập (📚), Đọc (📖), Khác (📌)
+- **Mức độ ưu tiên**: Thấp (⬇️), Trung bình (➡️), Cao (⬆️), Khẩn cấp (🔥)
+- **Trạng thái**: Chưa làm, Đang làm, Hoàn thành
+- **Thông báo thông minh**: Tự động nhắc nhở khi nhiệm vụu sắp đến hạn
+- Gắn nhiệm vụ với khóa học cụ thể
+
+### 📅 Thời khóa biểu
+- Quản lý lịch học theo từng ngày trong tuần
+- **Loại buổi học**: Lý thuyết (📖), Thực hành (🔬), Bài tập (✏️), Thảo luận (💬)
+- Hiển thị thông tin chi tiết: thời gian bắt đầu/kết thúc, phòng học, ghi chú
+- Giao diện bảng thời khóa biểu đẹp mắt, dễ nhìn
+
+### 👤 Hồ sơ cá nhân
+- Quản lý thông tin sinh viên: họ tên, mã sinh viên, ngành học, học kỳ
+- Thống kê cá nhân: số khóa học, nhiệm vụ, buổi học
+- Cập nhật thông tin dễ dàng
+
+### 🔔 Hệ thống thông báo
+- **Thông báo trình duyệt**: Tự động nhắc nhở nhiệm vụ sắp đến hạn
+- **Cơ chế kiểm tra thông minh**: 
+  - Kiểm tra mỗi 30 phút khi tab đang mở
+  - Kiểm tra ngay khi quay lại tab sau khi rời đi
+- **Thời gian nhắc nhở**:
+  - 1 ngày trước hạn
+  - 3 giờ trước hạn  
+  - 30 phút trước hạn
+- Quản lý quyền thông báo trình duyệt
+- Kiểm tra thông báo thủ công
+
+## 🎨 Giao diện
+
+- **Design hiện đại**: Sử dụng Tailwind CSS v4 với gradient màu sắc đẹp mắt
+- **Glass Morphism**: Hiệu ứng kính mờ cho trang đăng nhập/đăng ký
+- **Icon & Emoji**: Kết hợp emoji để giao diện sinh động, dễ nhìn
+- **Responsive**: Tối ưu cho cả desktop và mobile
+- **Animation**: Hiệu ứng chuyển động mượt mà, hover effects
+- **Theme**: Chủ đề màu xanh-tím gradient xuyên suốt ứng dụng
 
 ## 🛠️ Công nghệ sử dụng
 
 ### Backend
-- **Node.js** + **Express.js** - Server framework
-- **MongoDB Atlas** - Database (Cloud)
-- **Mongoose** - ODM
-- **JWT** - Authentication
-- **bcryptjs** - Password hashing
+- **Node.js** + **Express.js**: Server và API
+- **MongoDB Atlas**: Cơ sở dữ liệu cloud
+- **JWT**: Xác thực và bảo mật
+- **bcryptjs**: Mã hóa mật khẩu
 
 ### Frontend
-- **React** (v19) - UI Library
-- **React Router** - Navigation
-- **Tailwind CSS v4** - Styling
-- **Axios** - HTTP Client
-- **React Toastify** - Notifications
-- **React Icons** - Icons
-- **date-fns** - Date utilities
+- **React 19**: Framework UI hiện đại
+- **Vite**: Build tool nhanh chóng
+- **React Router v7**: Điều hướng trang
+- **Tailwind CSS v4**: Styling với utility classes
+- **React Icons**: Thư viện icon
+- **React Toastify**: Thông báo toast
+- **Axios**: HTTP client
+
+### Tính năng đặc biệt
+- **Browser Notification API**: Thông báo nền trình duyệt
+- **Context API**: Quản lý state toàn cục (Auth, Theme)
+- **Custom Hooks**: useAuth, useTaskNotifications
+- **Protected Routes**: Bảo vệ các trang yêu cầu đăng nhập
+
+## 🚀 Cài đặt và chạy
+
+### Yêu cầu
+- Node.js (v16 trở lên)
+- MongoDB Atlas account hoặc MongoDB local
+- Trình duyệt hiện đại (Chrome, Firefox, Edge)
+
+### Cài đặt Backend
+```powershell
+cd backend
+npm install
+```
+
+Tạo file `.env` trong thư mục `backend`:
+```env
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+PORT=5000
+```
+
+Chạy backend:
+```powershell
+npm start
+```
+
+### Cài đặt Frontend
+```powershell
+cd frontend
+npm install
+```
+
+Chạy frontend:
+```powershell
+npm run dev
+```
+
+Ứng dụng sẽ chạy tại:
+- Frontend: http://localhost:5173
+- Backend: http://localhost:5000
 
 ## 📁 Cấu trúc dự án
 
@@ -32,207 +123,88 @@
 study-planner/
 ├── backend/
 │   ├── src/
-│   │   ├── config/
-│   │   │   └── database.js         # Kết nối MongoDB
-│   │   ├── models/
-│   │   │   ├── User.js            # Model User
-│   │   │   ├── Course.js          # Model Môn học
-│   │   │   ├── Task.js            # Model Công việc
-│   │   │   └── Timetable.js       # Model Thời khóa biểu
-│   │   ├── controllers/
-│   │   │   ├── authController.js  # Controller Authentication
-│   │   │   ├── courseController.js
-│   │   │   ├── taskController.js
-│   │   │   └── timetableController.js
-│   │   ├── routes/
-│   │   │   ├── authRoutes.js
-│   │   │   ├── courseRoutes.js
-│   │   │   ├── taskRoutes.js
-│   │   │   └── timetableRoutes.js
-│   │   ├── middleware/
-│   │   │   └── auth.js            # JWT Middleware
-│   │   └── server.js              # Entry point
-│   ├── .env                       # Environment variables
+│   │   ├── config/         # Cấu hình database
+│   │   ├── controllers/    # Xử lý logic API
+│   │   ├── middleware/     # Auth middleware
+│   │   ├── models/         # MongoDB models
+│   │   ├── routes/         # API routes
+│   │   └── server.js       # Entry point
 │   └── package.json
 │
 └── frontend/
     ├── src/
-    │   ├── components/
-    │   │   ├── layout/
-    │   │   │   └── Layout.jsx     # Main layout với sidebar
-    │   │   └── PrivateRoute.jsx   # Protected route
-    │   ├── context/
-    │   │   └── AuthContext.jsx    # Auth state management
-    │   ├── pages/
-    │   │   ├── auth/
-    │   │   │   ├── Login.jsx
-    │   │   │   └── Register.jsx
-    │   │   ├── dashboard/
-    │   │   │   └── Dashboard.jsx  # Trang chính
-    │   │   ├── courses/
-    │   │   │   └── Courses.jsx    # Quản lý môn học
-    │   │   ├── tasks/
-    │   │   │   └── Tasks.jsx      # Quản lý task
-    │   │   ├── timetable/
-    │   │   │   └── Timetable.jsx  # Thời khóa biểu
-    │   │   └── profile/
-    │   │       └── Profile.jsx    # Hồ sơ cá nhân
-    │   ├── services/
-    │   │   └── api.js             # API service
-    │   ├── utils/
-    │   │   ├── constants.js       # Constants
-    │   │   └── dateHelpers.js     # Date utilities
-    │   ├── App.jsx                # Root component
-    │   └── main.jsx              # Entry point
-    ├── .env
+    │   ├── components/     # Components tái sử dụng
+    │   │   └── layout/     # Layout và Sidebar
+    │   ├── context/        # Context API (Auth, Theme)
+    │   ├── hooks/          # Custom hooks
+    │   ├── pages/          # Các trang chính
+    │   │   ├── auth/       # Login, Register
+    │   │   ├── courses/    # Quản lý khóa học
+    │   │   ├── dashboard/  # Trang tổng quan
+    │   │   ├── profile/    # Hồ sơ cá nhân
+    │   │   ├── tasks/      # Quản lý nhiệm vụ
+    │   │   └── timetable/  # Thời khóa biểu
+    │   ├── services/       # API service
+    │   ├── utils/          # Utilities, constants
+    │   ├── App.jsx         # Root component
+    │   └── main.jsx        # Entry point
     └── package.json
 ```
 
-## 🚀 Hướng dẫn cài đặt
+## 🎯 Hướng dẫn sử dụng
 
-### 1. Clone repository
-```bash
-cd d:\study-planner
-```
+1. **Đăng ký/Đăng nhập**: Tạo tài khoản hoặc đăng nhập
+2. **Cập nhật hồ sơ**: Điền thông tin cá nhân (tùy chọn)
+3. **Thêm khóa học**: Tạo danh sách các môn học đang theo học
+4. **Tạo thời khóa biểu**: Thêm lịch học cho từng ngày
+5. **Quản lý nhiệm vụ**: Tạo task và gắn với khóa học
+6. **Bật thông báo**: Cho phép thông báo trình duyệt để nhận nhắc nhở
+7. **Theo dõi tiến độ**: Xem tổng quan tại Dashboard
 
-### 2. Cài đặt Backend
+## 🔐 Bảo mật
 
-```bash
-cd backend
-npm install
-```
+- Mật khẩu được mã hóa với bcrypt
+- JWT token cho xác thực
+- Protected routes với middleware
+- CORS configuration
+- Input validation
 
-**File `.env` đã được tạo sẵn với:**
-```env
-PORT=5000
-MONGODB_URI=mongodb+srv://doanthetindeveloper:doanthetin193@cluster0.g69mfzf.mongodb.net/study_planner?retryWrites=true&w=majority&appName=Cluster0
-JWT_SECRET=your_jwt_secret_key_change_this_in_production_2024
-NODE_ENV=development
-```
+## 📝 API Endpoints
 
-### 3. Cài đặt Frontend
-
-```bash
-cd ../frontend
-npm install
-```
-
-**File `.env` đã được tạo sẵn với:**
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-## ▶️ Chạy ứng dụng
-
-### Chạy Backend (Terminal 1)
-```bash
-cd backend
-npm run dev
-```
-Server sẽ chạy tại: `http://localhost:5000`
-
-### Chạy Frontend (Terminal 2)
-```bash
-cd frontend
-npm run dev
-```
-Frontend sẽ chạy tại: `http://localhost:5173`
-
-## 📋 API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - Đăng ký user mới
+### Auth
+- `POST /api/auth/register` - Đăng ký
 - `POST /api/auth/login` - Đăng nhập
-- `GET /api/auth/me` - Lấy thông tin user (Private)
-- `PUT /api/auth/profile` - Cập nhật profile (Private)
 
-### Courses (Môn học)
-- `GET /api/courses` - Lấy danh sách môn học
-- `GET /api/courses/:id` - Lấy chi tiết môn học
-- `POST /api/courses` - Tạo môn học mới
-- `PUT /api/courses/:id` - Cập nhật môn học
-- `DELETE /api/courses/:id` - Xóa môn học
+### Courses
+- `GET /api/courses` - Lấy danh sách khóa học
+- `POST /api/courses` - Tạo khóa học mới
+- `PUT /api/courses/:id` - Cập nhật khóa học
+- `DELETE /api/courses/:id` - Xóa khóa học
 
-### Tasks (Công việc)
-- `GET /api/tasks` - Lấy danh sách task (có filter)
-- `GET /api/tasks/:id` - Lấy chi tiết task
-- `GET /api/tasks/stats/summary` - Lấy thống kê task
-- `POST /api/tasks` - Tạo task mới
-- `PUT /api/tasks/:id` - Cập nhật task
-- `DELETE /api/tasks/:id` - Xóa task
+### Tasks
+- `GET /api/tasks` - Lấy danh sách nhiệm vụ
+- `POST /api/tasks` - Tạo nhiệm vụ mới
+- `PUT /api/tasks/:id` - Cập nhật nhiệm vụ
+- `DELETE /api/tasks/:id` - Xóa nhiệm vụ
 
-### Timetable (Thời khóa biểu)
-- `GET /api/timetable` - Lấy lịch học (có filter theo ngày)
-- `GET /api/timetable/weekly` - Lấy lịch học theo tuần
-- `GET /api/timetable/:id` - Lấy chi tiết lịch học
-- `POST /api/timetable` - Tạo lịch học mới
-- `PUT /api/timetable/:id` - Cập nhật lịch học
-- `DELETE /api/timetable/:id` - Xóa lịch học
+### Timetable
+- `GET /api/timetable` - Lấy thời khóa biểu
+- `POST /api/timetable` - Thêm buổi học
+- `PUT /api/timetable/:id` - Cập nhật buổi học
+- `DELETE /api/timetable/:id` - Xóa buổi học
 
-## 🎨 Tính năng đã triển khai
+## 🎨 Color Scheme
 
-### ✅ Backend (Hoàn thành 100%)
-- [x] Kết nối MongoDB Atlas
-- [x] Models: User, Course, Task, Timetable
-- [x] Authentication với JWT
-- [x] CRUD API cho tất cả models
-- [x] Middleware bảo vệ routes
-- [x] Error handling
-- [x] Validation dữ liệu
-
-### ✅ Frontend (Hoàn thành 70%)
-- [x] Cấu trúc dự án React + Router
-- [x] Authentication Context
-- [x] API Service layer
-- [x] Login/Register pages
-- [x] Main Layout với Sidebar
-- [x] Dashboard với thống kê
-- [x] Private Routes
-- [x] Toast notifications
-- [x] Profile page
-- [ ] Courses Management (UI cơ bản, cần hoàn thiện CRUD)
-- [ ] Tasks Management (UI cơ bản, cần hoàn thiện CRUD)
-- [ ] Timetable/Calendar view (UI cơ bản, cần hoàn thiện)
-
-## 🔄 Các bước tiếp theo
-
-1. **Hoàn thiện Components**:
-   - Courses: Form thêm/sửa môn học, danh sách với filter
-   - Tasks: Form thêm/sửa task, filter nâng cao, drag & drop
-   - Timetable: Calendar view, thêm/sửa lịch học
-
-2. **Tính năng nâng cao**:
-   - Push Notifications (browser)
-   - Dark mode
-   - Export/Import data
-   - Statistics & Charts
-   - Mobile responsive improvements
-
-3. **PWA (Optional)**:
-   - Service Worker
-   - Offline support
-   - Install prompt
-
-## 🧪 Test ứng dụng
-
-1. Mở trình duyệt: `http://localhost:5173`
-2. Đăng ký tài khoản mới
-3. Đăng nhập
-4. Xem Dashboard với thống kê
-5. Test các trang: Courses, Tasks, Timetable, Profile
-
-## 📝 Ghi chú
-
-- Database đã được kết nối với MongoDB Atlas (cloud)
-- JWT token có thời hạn 30 ngày
-- Passwords được mã hóa với bcrypt
-- API hỗ trợ CORS cho frontend
-- Frontend sử dụng Tailwind CSS v4 (PostCSS)
+- **Primary**: Blue-Indigo-Purple gradient
+- **Success**: Green tones
+- **Warning**: Yellow-Orange tones
+- **Danger**: Red tones
+- **Info**: Cyan-Blue tones
 
 ## 👨‍💻 Tác giả
 
-Đồ án 1 - Ứng dụng Lập Kế Hoạch Học Tập cho Sinh Viên
+Dự án Study Planner - Ứng dụng quản lý học tập cho sinh viên
 
----
+## 📄 License
 
-**Good luck với đồ án! 🎓📚**
+MIT License - Free to use and modify

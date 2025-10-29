@@ -1,17 +1,17 @@
 export const TASK_TYPES = {
-  assignment: { label: 'Bài tập', color: 'blue' },
-  exam: { label: 'Kiểm tra', color: 'red' },
-  project: { label: 'Dự án', color: 'purple' },
-  reading: { label: 'Đọc tài liệu', color: 'green' },
-  review: { label: 'Ôn tập', color: 'yellow' },
-  other: { label: 'Khác', color: 'gray' }
+  assignment: { label: 'Bài tập', color: 'blue', icon: '📝' },
+  exam: { label: 'Kiểm tra', color: 'red', icon: '📋' },
+  project: { label: 'Dự án', color: 'purple', icon: '🚀' },
+  reading: { label: 'Đọc tài liệu', color: 'green', icon: '📚' },
+  review: { label: 'Ôn tập', color: 'yellow', icon: '📖' },
+  other: { label: 'Khác', color: 'gray', icon: '📌' }
 };
 
 export const TASK_PRIORITIES = {
-  low: { label: 'Thấp', color: 'gray' },
-  medium: { label: 'Trung bình', color: 'blue' },
-  high: { label: 'Cao', color: 'orange' },
-  urgent: { label: 'Khẩn cấp', color: 'red' }
+  low: { label: 'Thấp', color: 'gray', icon: '⬇️' },
+  medium: { label: 'Trung bình', color: 'blue', icon: '➡️' },
+  high: { label: 'Cao', color: 'orange', icon: '⬆️' },
+  urgent: { label: 'Khẩn cấp', color: 'red', icon: '🔥' }
 };
 
 export const TASK_STATUS = {
@@ -22,20 +22,20 @@ export const TASK_STATUS = {
 };
 
 export const DAYS_OF_WEEK = [
-  { value: 0, label: 'Chủ nhật', short: 'CN' },
-  { value: 1, label: 'Thứ 2', short: 'T2' },
-  { value: 2, label: 'Thứ 3', short: 'T3' },
-  { value: 3, label: 'Thứ 4', short: 'T4' },
-  { value: 4, label: 'Thứ 5', short: 'T5' },
-  { value: 5, label: 'Thứ 6', short: 'T6' },
-  { value: 6, label: 'Thứ 7', short: 'T7' }
+  { value: 0, label: 'Chủ nhật', short: 'CN', emoji: '🌞' },
+  { value: 1, label: 'Thứ 2', short: 'T2', emoji: '📅' },
+  { value: 2, label: 'Thứ 3', short: 'T3', emoji: '📅' },
+  { value: 3, label: 'Thứ 4', short: 'T4', emoji: '📅' },
+  { value: 4, label: 'Thứ 5', short: 'T5', emoji: '📅' },
+  { value: 5, label: 'Thứ 6', short: 'T6', emoji: '📅' },
+  { value: 6, label: 'Thứ 7', short: 'T7', emoji: '🎉' }
 ];
 
 export const CLASS_TYPES = {
-  lecture: { label: 'Lý thuyết', color: 'blue' },
-  lab: { label: 'Thực hành', color: 'green' },
-  tutorial: { label: 'Bài tập', color: 'purple' },
-  seminar: { label: 'Seminar', color: 'orange' }
+  lecture: { label: 'Lý thuyết', color: 'blue', icon: '📖' },
+  lab: { label: 'Thực hành', color: 'green', icon: '🔬' },
+  tutorial: { label: 'Bài tập', color: 'purple', icon: '✏️' },
+  seminar: { label: 'Seminar', color: 'orange', icon: '💬' }
 };
 
 export const COURSE_COLORS = [

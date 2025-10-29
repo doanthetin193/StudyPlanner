@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { FaEnvelope, FaLock } from 'react-icons/fa';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -33,18 +32,28 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 flex items-center justify-center p-4">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="max-w-md w-full bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-10 relative z-10 border border-white/20">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">📚 Study Planner</h1>
-          <p className="text-gray-600 mt-2">Quản lý kế hoạch học tập hiệu quả</p>
+          <div className="inline-block p-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl mb-4 shadow-lg">
+            <span className="text-5xl">📚</span>
+          </div>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+            Study Planner
+          </h1>
+          <p className="text-gray-600 font-medium">Quản lý kế hoạch học tập hiệu quả</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              <FaEnvelope className="inline mr-2" />
-              Email
+            <label className="block text-sm font-bold text-gray-700 mb-2">
+              📧 Email
             </label>
             <input
               type="email"
@@ -52,15 +61,14 @@ export default function Login() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-5 py-3.5 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-medium"
               placeholder="email@example.com"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              <FaLock className="inline mr-2" />
-              Mật khẩu
+            <label className="block text-sm font-bold text-gray-700 mb-2">
+              🔒 Mật khẩu
             </label>
             <input
               type="password"
@@ -68,7 +76,7 @@ export default function Login() {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-5 py-3.5 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all font-medium"
               placeholder="••••••••"
             />
           </div>
@@ -76,18 +84,20 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 transition-all shadow-xl hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
           >
-            {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
+            {loading ? '⏳ Đang đăng nhập...' : '🚀 Đăng nhập'}
           </button>
         </form>
 
-        <p className="text-center mt-6 text-gray-600">
-          Chưa có tài khoản?{' '}
-          <Link to="/register" className="text-blue-600 hover:underline font-semibold">
-            Đăng ký ngay
-          </Link>
-        </p>
+        <div className="mt-8 pt-6 border-t-2 border-gray-200">
+          <p className="text-center text-gray-600 font-medium">
+            Chưa có tài khoản?{' '}
+            <Link to="/register" className="text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text hover:underline font-bold">
+              Đăng ký ngay ✨
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

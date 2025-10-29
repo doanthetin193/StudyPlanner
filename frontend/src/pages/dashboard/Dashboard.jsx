@@ -110,10 +110,16 @@ export default function Dashboard() {
       {/* Notification Permission Banner */}
       <NotificationPermission />
 
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
-          <p className="text-gray-600 mt-1">Tổng quan về kế hoạch học tập của bạn</p>
+      {/* Hero Header with Gradient */}
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl shadow-xl p-8 text-white">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold mb-2">📚 Dashboard</h1>
+            <p className="text-blue-100 text-lg">Chào mừng trở lại! Hãy cùng chinh phục kế hoạch học tập của bạn 🚀</p>
+          </div>
+          <div className="hidden md:block">
+            <div className="text-6xl opacity-20">📊</div>
+          </div>
         </div>
       </div>
 
@@ -122,14 +128,17 @@ export default function Dashboard() {
         {statCards.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <div key={index} className={`${stat.bgColor} rounded-lg p-6 shadow-sm`}>
+            <div 
+              key={index} 
+              className={`${stat.bgColor} rounded-xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer border-l-4 ${stat.color.replace('bg-', 'border-')}`}
+            >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">{stat.title}</p>
-                  <p className={`text-3xl font-bold ${stat.textColor}`}>{stat.value}</p>
+                  <p className="text-sm font-medium text-gray-600 mb-2">{stat.title}</p>
+                  <p className={`text-4xl font-extrabold ${stat.textColor}`}>{stat.value}</p>
                 </div>
-                <div className={`${stat.color} w-12 h-12 rounded-lg flex items-center justify-center`}>
-                  <Icon className="text-white text-xl" />
+                <div className={`${stat.color} w-14 h-14 rounded-xl flex items-center justify-center shadow-lg transform hover:rotate-12 transition-transform duration-300`}>
+                  <Icon className="text-white text-2xl" />
                 </div>
               </div>
             </div>
@@ -139,19 +148,34 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Upcoming Tasks */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-800">
-              <FaCalendarCheck className="inline mr-2 text-blue-600" />
+        <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl transition-shadow duration-300">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 flex items-center">
+              <div className="bg-blue-100 p-2 rounded-lg mr-3">
+                <FaCalendarCheck className="text-blue-600 text-xl" />
+              </div>
               Công việc sắp tới
             </h2>
-            <Link to="/tasks" className="text-blue-600 hover:underline text-sm">
-              Xem tất cả
+            <Link 
+              to="/tasks" 
+              className="text-blue-600 hover:text-blue-700 font-semibold text-sm bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              Xem tất cả →
             </Link>
           </div>
 
           {upcomingTasks.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">Không có công việc sắp tới</p>
+            <div className="text-center py-16 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border-2 border-dashed border-blue-200">
+              <div className="text-7xl mb-4 animate-bounce">📝</div>
+              <p className="text-gray-700 text-xl font-semibold mb-2">Không có công việc sắp tới</p>
+              <p className="text-gray-500 text-base">Bạn đang rảnh rỗi! 🎉</p>
+              <Link
+                to="/tasks"
+                className="inline-block mt-4 px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all font-semibold"
+              >
+                ➕ Thêm công việc mới
+              </Link>
+            </div>
           ) : (
             <div className="space-y-3">
               {upcomingTasks.map((task) => {
@@ -161,47 +185,56 @@ export default function Dashboard() {
                 return (
                   <div
                     key={task._id}
-                    className={`border rounded-lg p-4 hover:shadow-md transition ${
-                      overdueTask ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                    className={`border-l-4 rounded-xl p-4 transition-all duration-300 ${
+                      overdueTask 
+                        ? 'border-red-500 bg-gradient-to-r from-red-50 to-orange-50 hover:shadow-xl hover:from-red-100 hover:to-orange-100' 
+                        : task.status === 'completed'
+                        ? 'border-green-500 bg-gradient-to-r from-green-50 to-emerald-50 hover:shadow-xl hover:from-green-100'
+                        : 'border-blue-400 bg-gradient-to-r from-blue-50 to-cyan-50 hover:shadow-xl hover:from-blue-100 hover:border-blue-600'
                     }`}
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
+                        <div className="flex items-center gap-3 mb-3">
                           <button
                             onClick={() => handleToggleTaskStatus(task._id, task.status)}
-                            className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+                            className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all duration-200 ${
                               task.status === 'completed'
-                                ? 'bg-green-500 border-green-500'
-                                : 'border-gray-300 hover:border-green-500'
+                                ? 'bg-green-500 border-green-500 shadow-lg'
+                                : 'border-gray-300 hover:border-green-500 hover:scale-110'
                             }`}
                           >
                             {task.status === 'completed' && (
-                              <FaCheckCircle className="text-white text-xs" />
+                              <FaCheckCircle className="text-white text-sm" />
                             )}
                           </button>
-                          <h3 className={`font-semibold ${
-                            task.status === 'completed' ? 'line-through text-gray-500' : 'text-gray-800'
-                          }`}>
-                            {task.title}
-                          </h3>
+                          <div className="flex-1">
+                            <h3 className={`font-bold text-base ${
+                              task.status === 'completed' ? 'line-through text-gray-500' : 'text-gray-800'
+                            }`}>
+                              {task.title}
+                            </h3>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2 text-sm">
+                        <div className="flex flex-wrap items-center gap-2 text-sm mb-2">
                           <span
-                            className="px-2 py-1 rounded-full text-xs font-medium"
+                            className="px-3 py-1 rounded-full text-xs font-bold shadow-sm"
                             style={{
-                              backgroundColor: task.course?.color + '20',
-                              color: task.course?.color
+                              backgroundColor: task.course?.color + '30',
+                              color: task.course?.color,
+                              border: `1.5px solid ${task.course?.color}50`
                             }}
                           >
-                            {task.course?.name}
+                            📚 {task.course?.name}
                           </span>
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium bg-${priorityConfig.color}-100 text-${priorityConfig.color}-700`}>
-                            {priorityConfig.label}
+                          <span className={`px-3 py-1 rounded-full text-xs font-bold shadow-sm bg-${priorityConfig.color}-100 text-${priorityConfig.color}-700 border border-${priorityConfig.color}-300`}>
+                            {priorityConfig.icon} {priorityConfig.label}
                           </span>
                         </div>
-                        <p className={`text-sm mt-2 ${overdueTask ? 'text-red-600 font-semibold' : 'text-gray-600'}`}>
-                          {overdueTask ? '⚠️ Quá hạn: ' : ''}
+                        <p className={`text-sm font-semibold flex items-center gap-2 ${
+                          overdueTask ? 'text-red-700' : task.status === 'completed' ? 'text-green-700' : 'text-blue-700'
+                        }`}>
+                          {overdueTask ? '⚠️ Quá hạn: ' : task.status === 'completed' ? '✅ ' : '🕒 '}
                           {formatRelativeTime(task.dueDate)}
                         </p>
                       </div>
@@ -214,50 +247,62 @@ export default function Dashboard() {
         </div>
 
         {/* Courses Overview */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-800">
-              <FaListAlt className="inline mr-2 text-blue-600" />
+        <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl transition-shadow duration-300">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 flex items-center">
+              <div className="bg-green-100 p-2 rounded-lg mr-3">
+                <FaListAlt className="text-green-600 text-xl" />
+              </div>
               Môn học ({courses.length})
             </h2>
-            <Link to="/courses" className="text-blue-600 hover:underline text-sm">
-              Quản lý
+            <Link 
+              to="/courses" 
+              className="text-green-600 hover:text-green-700 font-semibold text-sm bg-green-50 px-4 py-2 rounded-lg hover:bg-green-100 transition-colors"
+            >
+              Quản lý →
             </Link>
           </div>
 
           {courses.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-gray-500 mb-4">Chưa có môn học nào</p>
+            <div className="text-center py-16 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-dashed border-green-200">
+              <div className="text-7xl mb-4 animate-bounce">📚</div>
+              <p className="text-gray-700 text-xl font-semibold mb-2">Chưa có môn học nào</p>
+              <p className="text-gray-500 text-base mb-4">Hãy thêm môn học để bắt đầu!</p>
               <Link
                 to="/courses"
-                className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="inline-block px-6 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 shadow-lg hover:shadow-xl transition-all font-semibold"
               >
-                Thêm môn học
+                ➕ Thêm môn học
               </Link>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-3 max-h-96 overflow-y-auto">
               {courses.slice(0, 5).map((course) => (
                 <div
                   key={course._id}
-                  className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
+                  className="border-l-4 border-gray-200 rounded-lg p-4 hover:shadow-lg hover:border-l-blue-500 transition-all duration-300 bg-gradient-to-r from-white to-gray-50 hover:from-blue-50 hover:to-white cursor-pointer"
+                  style={{ borderLeftColor: course.color }}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center">
+                    <div className="flex items-center flex-1">
                       <div
-                        className="w-4 h-4 rounded-full mr-3"
+                        className="w-12 h-12 rounded-xl mr-4 flex items-center justify-center text-white font-bold text-lg shadow-lg"
                         style={{ backgroundColor: course.color }}
-                      />
-                      <div>
-                        <h3 className="font-semibold text-gray-800">{course.name}</h3>
-                        <p className="text-sm text-gray-500">{course.code}</p>
+                      >
+                        {course.code?.charAt(0) || '📖'}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-bold text-gray-800 text-lg">{course.name}</h3>
+                        <p className="text-sm text-gray-500 font-medium">{course.code}</p>
+                        {course.instructor && (
+                          <p className="text-xs text-gray-400 mt-1">👨‍🏫 {course.instructor}</p>
+                        )}
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm text-gray-600">{course.credits} tín chỉ</p>
-                      {course.instructor && (
-                        <p className="text-xs text-gray-500">{course.instructor}</p>
-                      )}
+                      <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
+                        {course.credits} TC
+                      </div>
                     </div>
                   </div>
                 </div>
