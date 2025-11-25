@@ -73,4 +73,15 @@ export const timetableAPI = {
   delete: (id) => api.delete(`/timetable/${id}`)
 };
 
+// Admin API
+export const adminAPI = {
+  getStats: () => api.get('/admin/stats'),
+  getAllUsers: (params) => api.get('/admin/users', { params }),
+  getUserById: (id) => api.get(`/admin/users/${id}`),
+  updateUser: (id, data) => api.put(`/admin/users/${id}`, data),
+  deleteUser: (id) => api.delete(`/admin/users/${id}`),
+  getAllCourses: (params) => api.get('/admin/courses', { params }),
+  getAllTasks: (params) => api.get('/admin/tasks', { params })
+};
+
 export default api;

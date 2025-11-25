@@ -7,7 +7,8 @@ import {
   FaTasks, 
   FaCalendarAlt,
   FaBars,
-  FaTimes
+  FaTimes,
+  FaUserShield
 } from 'react-icons/fa';
 import { useState } from 'react';
 
@@ -25,6 +26,11 @@ export default function Layout() {
     { name: 'Công việc', href: '/tasks', icon: FaTasks },
     { name: 'Thời khóa biểu', href: '/timetable', icon: FaCalendarAlt },
   ];
+
+  // Add admin link if user is admin
+  if (user?.role === 'admin') {
+    navigation.push({ name: 'Admin', href: '/admin', icon: FaUserShield });
+  }
 
   const isActive = (path) => {
     if (path === '/') {

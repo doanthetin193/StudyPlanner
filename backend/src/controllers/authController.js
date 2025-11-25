@@ -40,6 +40,7 @@ const register = async (req, res) => {
         studentId: user.studentId,
         major: user.major,
         semester: user.semester,
+        role: user.role,
         token: generateToken(user._id)
       });
     } else {
@@ -68,6 +69,7 @@ const login = async (req, res) => {
         studentId: user.studentId,
         major: user.major,
         semester: user.semester,
+        role: user.role,
         preferences: user.preferences,
         token: generateToken(user._id)
       });

@@ -15,6 +15,7 @@ import Courses from './pages/courses/Courses';
 import Tasks from './pages/tasks/Tasks';
 import Timetable from './pages/timetable/Timetable';
 import Profile from './pages/profile/Profile';
+import Admin from './pages/admin/Admin';
 
 // Protected Route Component
 function PrivateRoute({ children }) {
@@ -55,6 +56,7 @@ function App() {
               <Route path="tasks" element={<Tasks />} />
               <Route path="timetable" element={<Timetable />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="admin" element={<Admin />} />
             </Route>
 
             {/* Catch all */}
